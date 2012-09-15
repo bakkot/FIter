@@ -53,8 +53,8 @@ class FilteredObject {
     std::function<bool(value_type)> filter;
 
     // Get the iterator at the base of a chain of FIters. For example, if you apply a
-    // filter to a vector, and then a map to the filter, calling this will return the
-    // vector iterator at the current location.
+    // filter to a vector, and then a map to the filter, calling this on the map will
+    // return the vector iterator at the current location.
     // See FIter.h for implementation.
     auto get_base() -> decltype(_get_base<IterT>(m_cur, 0)) {
       return _get_base<IterT>(m_cur, 0);
@@ -83,7 +83,7 @@ class FilteredObject {
     { first(); }
     
     const_iterator& operator=(const const_iterator& r)
-    { m_begin = r.m_begin, m_cur = r.m_cur; m_end = r.m_end; filter = r.filter; first(); return *this; }
+    { m_begin = r.m_begin; m_cur = r.m_cur; m_end = r.m_end; filter = r.filter; first(); return *this; }
   };
   
 
