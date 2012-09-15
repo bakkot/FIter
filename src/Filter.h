@@ -23,7 +23,7 @@ namespace FIter {
 // std::vector<int> v{0, 1, 2, 3, 4, 5, 6};
 // auto vf = FIter::Filter(mod2)(v.begin(), v.end());
 // for(auto x : vf)
-//   std::cout << x << ', ';
+//   std::cout << x << ",";
 // 
 // This will print '0,2,4,6,', assuming 'mod2' is defined appropriately. (Say, as
 // 'bool mod2(int x){return x%2==0;}'.
