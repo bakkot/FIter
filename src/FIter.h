@@ -69,8 +69,8 @@ class Iterator_base<std::bidirectional_iterator_tag, IterT, value_type> : public
 	IterT* parent;
  public:
   Iterator_base() { parent = static_cast<IterT*>(this); }
-	IterT& operator--() { --(parent->m_cur); return *parent; }
-	IterT operator--(int) { auto tmp = *parent; --(parent->m_cur); return tmp; }  
+	IterT& operator--() { parent->unadvance(); return *parent; }
+	IterT operator--(int) { auto tmp = *parent; parent->unadvance(); return tmp; }  
 };
 
 template <class IterT, class value_type> // random access iterator

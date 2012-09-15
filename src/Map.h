@@ -8,6 +8,21 @@
 namespace FIter {
 
 
+// All iterators support ++, so advance() is always defined. However, it doesn't make
+// sense to define unadvance, since -- isn't always supported. So we kludge it in like
+// this, if necessary.
+template <class Tag, class IterT>
+struct Map_unadvance {};
+
+template <class IterT> // only define unadvance if bidiretional
+struct Map_unadvance<std::bidirectional_iterator_tag, IterT> {
+    void unadvance() {
+      auto parent = static_cast<IterT*>(this);
+    	--(parent->m_cur);
+    }
+};
+
+
 // A mapping iterator.
 //
 // The point of this file. Given a pair of iterators of type IterT and a function,
@@ -46,7 +61,8 @@ class MapObject {
 
  public:
   struct const_iterator : public std::iterator<iterator_category, value_type>,
-  public Iterator_base<iterator_category, const_iterator, value_type>
+  public Iterator_base<iterator_category, const_iterator, value_type>,
+  public Map_unadvance<typename least_iterator_type<iterator_category, std::bidirectional_iterator_tag>::type, const_iterator>
   {
     IterT m_cur;
     std::function<value_type(input_type)> mapf;
