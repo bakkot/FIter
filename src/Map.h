@@ -26,7 +26,7 @@ namespace FIter {
 //   std::cout << x << ',';
 // 
 // This will print '0,1,0,1,0,1,0,', assuming 'mod2' is defined appropriately. (Say, as
-// 'int mod2(int x){return x%2==0;}'.
+// 'int mod2(int x){return x%2;}'.
 
 template<typename IterT, typename value_type>
 class MapObject {
