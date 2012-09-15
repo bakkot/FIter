@@ -8,12 +8,16 @@
 namespace FIter {
 
 
-
-
+// A filter iterator.
+//
 // The point of this file. Given a pair of iterators of type IterT and a boolean function,
 // it can create iterators (a nested subtype) exporting all constant functions of the
 // original iterators except []. However, these iterators will skip over those elements
 // for which the given function returns false.
+//
+// Create using Filter(), below.
+//
+
 // Usage example:
 //
 // std::vector<int> v{0, 1, 2, 3, 4, 5, 6};
@@ -21,14 +25,9 @@ namespace FIter {
 // for(auto x : vf)
 //   std::cout << x << ', ';
 // 
-// This will print '0,2,4,6,', assuming mod2 is defined appropriately. (Say, as
-// bool mod2(int x){return x%2==0;}.
-//
-// Crucially, this object is constant space: it does not contain a copy of whatever
-// object backs the iterators, if such even exists. This means that any changes to
-// whatever the iterators operate on will be reflected here even if they occur after this
-// object has been instantiated. Furthermore, this object will be invalidated whenever
-// the iterators would be.
+// This will print '0,2,4,6,', assuming 'mod2' is defined appropriately. (Say, as
+// 'bool mod2(int x){return x%2==0;}'.
+
 template<typename IterT>
 class FilteredObject {
 
@@ -53,10 +52,10 @@ class FilteredObject {
     IterT m_end;
     std::function<bool(value_type)> filter;
 
-		// Get the iterator at the base of a chain of FIters. For example, if you apply a
-		// filter to a vector, and then a map to the filter, calling this will return the
-		// vector iterator at the current location.
-		// See FIter.h for implementation.
+    // Get the iterator at the base of a chain of FIters. For example, if you apply a
+    // filter to a vector, and then a map to the filter, calling this will return the
+    // vector iterator at the current location.
+    // See FIter.h for implementation.
     auto get_base() -> decltype(_get_base<IterT>(m_cur, 0)) {
       return _get_base<IterT>(m_cur, 0);
     }
