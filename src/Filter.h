@@ -106,7 +106,7 @@ class FilteredObject {
 
 // Stores a function. When called on a pair of iterators, returns a FilteredObject which
 // iterates between them using the passed function as a filter.
-// 'func is 'std::function<bool, ValueT>', in this case.
+// 'func' is 'std::function<bool, ValueT>', in this case.
 // Its purposes are to allow currying and implicit template instantiation.
 template <typename func>
 class FilterOn {
