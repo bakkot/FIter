@@ -32,7 +32,7 @@ template<typename IterT>
 class FilteredObject {
 
   typedef typename IterT::value_type value_type;
-  // Note: The following is necessary because Filters never reverse iteration.
+  // Note: The following is necessary because Filters never support reverse iteration.
   typedef typename least_iterator_type<typename IterT::iterator_category, std::forward_iterator_tag>::type least_common_subtype;
 
  protected:
