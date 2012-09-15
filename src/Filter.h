@@ -3,6 +3,7 @@
 
 #include <functional>
 #include <iterator>
+#include "FIter.h"
 
 namespace FIter {
 
