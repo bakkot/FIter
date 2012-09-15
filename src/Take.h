@@ -15,6 +15,9 @@ namespace FIter {
 // created iterators end after the given number of elements. Particularly useful for
 // infinite lists.
 //
+// If you ask for more items than you supply, this will only iterate over items supplied.
+// (E.g., taking ten items from a two-item list results in two items.)
+//
 // Create using Take(), below.
 //
 
@@ -66,14 +69,14 @@ class TakeObject {
     
     // Take handles comparisons differently, to support ending in the right place.
     bool operator==(const const_iterator& r) const {
-      if(to_take == 0 && r.is_end) {
+      if(to_take == 0 && r.is_end) { // taken enough, stop.
         return true;
       }
-      else if(is_end && r.is_end) {
+      else if(is_end && r.is_end) { // two end iterators are always identical
         return true;
       }
       else {
-        return (is_end == r.is_end) && (m_cur == r.m_cur) && (to_take == r.to_take);
+        return m_cur == r.m_cur;
       }
     }
 
@@ -96,7 +99,7 @@ class TakeObject {
   }
     
   const_iterator end() const {
-   return const_iterator(m_begin, 0, true);
+   return const_iterator(m_end, 0, true);
   }
 };
 
