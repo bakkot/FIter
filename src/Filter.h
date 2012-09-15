@@ -11,9 +11,8 @@ namespace FIter {
 // A filter iterator.
 //
 // The point of this file. Given a pair of iterators of type IterT and a boolean function,
-// it can create iterators (a nested subtype) exporting all constant functions of the
-// original iterators except []. However, these iterators will skip over those elements
-// for which the given function returns false.
+// it can create forward iterators (a nested subtype) from the passed pair. However, these
+// iterators will skip over those elements for which the given function returns false.
 //
 // Create using Filter(), below.
 //

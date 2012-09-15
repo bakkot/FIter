@@ -55,7 +55,7 @@ class Iterator_base<std::input_iterator_tag, IterT, value_type> {
   value_type operator*() const { return parent->access(); }  
   value_type* operator->() const { return &(parent->access()); }
   bool operator==(const IterT& r) const { return (parent->m_cur == r.m_cur); }
-  bool operator!=(const IterT& r) const { return !(operator==(r)); }
+  bool operator!=(const IterT& r) const { return !(parent->operator==(r)); }
 };
 
 // This provides nothing additional, but inherits from input_iterator
