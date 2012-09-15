@@ -40,7 +40,7 @@ template <> struct least_iterator_type<std::random_access_iterator_tag, std::ran
 // defined.
 // In order to inherit from this base class, a class must supply, at least, an m_cur 
 // member and access() and advance() methods, as well as unadvance() if the class supports
-// backwards iteration.
+// backwards iteration. If the class supports random access it must support access(n).
 template <class Tag, class IterT, class value_type>
 class Iterator_base;
 
@@ -78,8 +78,17 @@ class Iterator_base<std::random_access_iterator_tag, IterT, value_type> : public
  private:
 	IterT* parent;
  public:
+  typedef typename IterT::difference_type difference_type;
   Iterator_base() { parent = static_cast<IterT*>(this); }
-	const value_type& operator[](int i) { return (parent->m_cur)[i]; } 
+	IterT& operator+=(difference_type n) { parent->m_cur += n; return *parent; }
+	IterT operator+(difference_type n) { auto tmp = *parent; tmp+=n; return tmp; }
+	IterT& operator-=(difference_type n) { parent->m_cur -= n; return *parent; }
+	IterT operator-(difference_type n) { auto tmp = *parent; tmp-=n; return tmp; }
+	value_type& operator[](int n) { return (parent->access(n)); }
+	bool operator<(const IterT& r) { return (parent->m_cur) < r.m_cur; }
+	bool operator<=(const IterT& r) { return (parent->m_cur) <= r.m_cur; }
+	bool operator>(const IterT& r) { return (parent->m_cur) > r.m_cur; }
+	bool operator>=(const IterT& r) { return (parent->m_cur) >= r.m_cur; }
 };
 
 
