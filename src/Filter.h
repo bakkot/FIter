@@ -46,8 +46,7 @@ class FilteredObject {
   struct const_iterator : public std::iterator<least_common_subtype, value_type>,
   public Iterator_base<least_common_subtype, const_iterator, value_type>
   {
-    // Normally we don't store begin and end, but filter uses them for skipping safely.
-    IterT m_begin;
+    // Normally we don't store end, but filter uses them for skipping safely.
     IterT m_cur;
     IterT m_end;
     std::function<bool(value_type)> filter;
@@ -76,14 +75,14 @@ class FilteredObject {
 
    
 
-    const_iterator(const IterT & _cur, const IterT & _end, std::function<bool(value_type)> _filter) : m_begin(_cur), m_cur(_cur), m_end(_end), filter(_filter)
+    const_iterator(const IterT & _cur, const IterT & _end, std::function<bool(value_type)> _filter) : m_cur(_cur), m_end(_end), filter(_filter)
     { first(); } 
 
-    const_iterator(const const_iterator& r) : m_begin(r.m_begin), m_cur(r.m_cur),  m_end(r.m_end), filter(r.filter)
+    const_iterator(const const_iterator& r) :  m_cur(r.m_cur),  m_end(r.m_end), filter(r.filter)
     { first(); }
     
     const_iterator& operator=(const const_iterator& r)
-    { m_begin = r.m_begin; m_cur = r.m_cur; m_end = r.m_end; filter = r.filter; first(); return *this; }
+    { m_cur = r.m_cur; m_end = r.m_end; filter = r.filter; first(); return *this; }
   };
   
 
