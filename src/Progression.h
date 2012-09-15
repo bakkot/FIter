@@ -36,7 +36,9 @@ class ProgressionObject {
 
  public:
   class const_iterator : public std::iterator<std::forward_iterator_tag, ValueT> {
+   public:
     typedef ValueT value_type;
+   private:
     value_type current;
     value_type step;
     bool is_end;
@@ -51,16 +53,16 @@ class ProgressionObject {
       current += step;
       return tmp;
     }
-    value_type operator*() {
+    value_type operator*() const {
       return current;
     }
-    value_type* operator->() {
+    value_type* operator->() const {
       return &current;
     }
-    bool operator==(const const_iterator& r) {
+    bool operator==(const const_iterator& r) const {
       return is_end == r.is_end && current == r.current;
     }
-    bool operator!=(const const_iterator& r) {
+    bool operator!=(const const_iterator& r) const {
       return !(operator==(r));
     }
     
