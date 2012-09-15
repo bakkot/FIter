@@ -78,13 +78,13 @@ class Iterator_base<std::random_access_iterator_tag, IterT, value_type> : public
  private:
 	IterT* parent;
  public:
-  typedef typename IterT::difference_type difference_type;
   Iterator_base() { parent = static_cast<IterT*>(this); }
-	IterT& operator+=(difference_type n) { parent->m_cur += n; return *parent; }
-	IterT operator+(difference_type n) { auto tmp = *parent; tmp+=n; return tmp; }
-	IterT& operator-=(difference_type n) { parent->m_cur -= n; return *parent; }
-	IterT operator-(difference_type n) { auto tmp = *parent; tmp-=n; return tmp; }
-	value_type& operator[](int n) { return (parent->access(n)); }
+  //typedef typename IterT::difference_type difference_type; // strictly speaking the below 'n's should be of type difference_type, but gcc complains
+	IterT& operator+=(int n) { parent->m_cur += n; return *parent; }
+	IterT operator+(int n) { auto tmp = *parent; tmp+=n; return tmp; }
+	IterT& operator-=(int n) { parent->m_cur -= n; return *parent; }
+	IterT operator-(int n) { auto tmp = *parent; tmp-=n; return tmp; }
+	value_type operator[](int n) { return *(*parent+n); }
 	bool operator<(const IterT& r) { return (parent->m_cur) < r.m_cur; }
 	bool operator<=(const IterT& r) { return (parent->m_cur) <= r.m_cur; }
 	bool operator>(const IterT& r) { return (parent->m_cur) > r.m_cur; }
