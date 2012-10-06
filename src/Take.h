@@ -111,8 +111,6 @@ class TakeObject {
 
 // Stores an integer n. When called on a pair of iterators, returns a TakeObject which
 // iterates between the first n of them.
-// 'func' is 'std::function<bool, ValueT>', in this case.
-// Its purposes are to allow currying and implicit template instantiation.
 class Take {
   public:
   long n;
