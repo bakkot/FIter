@@ -12,7 +12,7 @@ namespace FIter {
 //
 // The point of this file. Given a pair of iterators of type IterT and a boolean function,
 // it can create forward iterators (a nested subtype) from the passed pair. However, these
-// created iterators once the function returns false for one of them.
+// created iterators end once the function returns false for one of them.
 //
 // If you ask for more items than you supply, this will only iterate over items supplied.
 // (E.g., taking ten items from a two-item list results in two items.)
@@ -23,11 +23,11 @@ namespace FIter {
 // Usage example:
 //
 // std::vector<int> v{0, 1, 2, 3, 4, 5, 6};
-// auto vtw = FIter::TakeWhile([](int x){return x<5;})(v.begin(), v.end());
+// auto vtw = FIter::TakeWhile([](int x){return x<3;})(v.begin(), v.end());
 // for(auto x : vtw)
 //   std::cout << x << ",";
 // 
-// This will print '0,1,2,3,4,'.
+// This will print '0,1,2,'.
 
 template<typename IterT>
 class TakeWhileObject {

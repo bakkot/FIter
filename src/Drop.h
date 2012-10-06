@@ -23,8 +23,8 @@ namespace FIter {
 // Usage example:
 //
 // std::vector<int> v{0, 1, 2, 3, 4, 5, 6};
-// auto vt = FIter::Drop(3)(v.begin(), v.end());
-// for(auto x : vt)
+// auto vd = FIter::Drop(3)(v.begin(), v.end());
+// for(auto x : vd)
 //   std::cout << x << ",";
 // 
 // This will print '3,4,5,6,'.
@@ -45,7 +45,7 @@ class DropObject {
 
  public:
  	// Actually one of the simplest types; doesn't even need its own type, really, because
- 	// we could just use the parent with advance(). Included for completeness, though.
+ 	// we could just use the parent. Included for completeness, though.
   struct const_iterator : public std::iterator<least_common_subtype, value_type>,
   public Iterator_base<least_common_subtype, const_iterator, value_type>
   {
